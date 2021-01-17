@@ -10,4 +10,8 @@ export const config: Config = {
     type: 'www',
     serviceWorker: null
   }],
+  devServer:{
+    address: '0.0.0.0',
+    port:3333
+  }
 };
