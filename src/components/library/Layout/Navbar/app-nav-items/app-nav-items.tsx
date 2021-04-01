@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, State } from '@stencil/core';
+import { Component, Host, h, Prop, State, Method } from '@stencil/core';
 import { popoverController } from '@ionic/core';
 
 @Component({
@@ -11,7 +11,7 @@ export class AppNavItems {
   @Prop() menuItems;
   @Prop() isChildren;
   @Prop() level = 0;
-
+  @State() popover: any;
   updateDropDown(level) {
     this.expanded = {
       ...this.expanded,
@@ -21,7 +21,7 @@ export class AppNavItems {
   async presentPopover(ev: any, level, menuChildren) {
     this.updateDropDown(level);
 
-    const popover = await popoverController.create({
+    this.popover = await popoverController.create({
       component: 'app-menu-items',
       cssClass: 'app-nav-items-popover-class',
       event: ev,
@@ -31,13 +31,17 @@ export class AppNavItems {
       },
     });
 
-    popover.onDidDismiss().then(() => {
+    this.popover.onDidDismiss().then(() => {
       this.updateDropDown(level);
     });
 
-    return await popover.present();
+    return await this.popover.present();
   }
-
+  @Method()
+  async dismissPopover() {
+    console.log("sd")
+    return await this.popover.dismiss();
+  }
   render() {
     return (
       <Host>
@@ -52,7 +56,11 @@ export class AppNavItems {
           return [
             menuChildren ? (
               [
-                <NavButton name={menuName} url={menuUrl} />,
+                <NavButton
+                  name={menuName}
+                  url={menuUrl}
+                  onClickHandler={async () => await this.dismissPopover()}
+                />,
                 <NavButtonToggle
                   onClickHandler={async ev => {
                     await this.presentPopover(ev, level, menuChildren);
@@ -61,7 +69,11 @@ export class AppNavItems {
                 />,
               ]
             ) : (
-              <NavButton name={menuName} url={menuUrl} />
+              <NavButton
+                name={menuName}
+                url={menuUrl}
+                onClickHandler={async () => await this.dismissPopover()}
+              />
             ),
           ];
         })}
@@ -71,8 +83,15 @@ export class AppNavItems {
   }
 }
 
-const NavButton = ({ name, url }, children) => (
-  <ion-button size="small" fill="clear" href={url}>
+const NavButton = ({ name, url, onClickHandler }, children) => (
+  <ion-button
+    size="small"
+    fill="clear"
+    href={url}
+    onClick={() => {
+      onClickHandler();
+    }}
+  >
     {name}
     {children}
   </ion-button>

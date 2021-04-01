@@ -3,7 +3,6 @@ import { Component, Host, h } from '@stencil/core';
 @Component({
   tag: 'app-page-2',
   styleUrl: 'app-page-2.css',
-  shadow: false,
 })
 export class AppPage2 {
   render() {

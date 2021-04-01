@@ -11,7 +11,6 @@ export const config: Config = {
       type: 'www',
       serviceWorker: null,
       baseUrl: 'https://isquadrepairsandiego.com',
-      prerenderConfig: './prerender.config.ts',
     },
   ],
 };

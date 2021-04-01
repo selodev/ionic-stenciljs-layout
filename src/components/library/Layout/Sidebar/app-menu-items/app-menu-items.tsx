@@ -7,9 +7,8 @@ import { Component, Host, h, Prop, State } from '@stencil/core';
 })
 export class AppMenuItems {
   @State() expanded = {};
-  @Prop() menuItems;
+  @Prop() menuItems = [];
   @Prop() level = 0;
-
   updateDropDown(level) {
     this.expanded = {
       ...this.expanded,
@@ -26,7 +25,11 @@ export class AppMenuItems {
             const expanded = this.expanded[level];
             return menuChildren ? (
               <div key={level} id={level}>
-                <MenuItem menuName={menuName} menuUrl={menuUrl} marginLeft>
+                <MenuItem
+                  menuName={menuName}
+                  menuUrl={menuUrl}
+                  marginLeft
+                >
                   {menuChildren && (
                     <MenuItemToggle
                       onClickHandler={() => {
@@ -47,7 +50,11 @@ export class AppMenuItems {
                 )}
               </div>
             ) : (
-              <MenuItem menuName={menuName} menuUrl={menuUrl} marginLeft />
+              <MenuItem
+                menuName={menuName}
+                menuUrl={menuUrl}
+                marginLeft
+              />
             );
           },
         )}
@@ -57,16 +64,28 @@ export class AppMenuItems {
   }
 }
 
- const MenuItem = ({ menuName, menuUrl, marginLeft }, children) => (
+const MenuItem = (
+  { menuName, menuUrl, marginLeft },
+  children,
+) => (
   <ion-menu-toggle autoHide={false}>
-    <ion-item href={menuUrl} lines="none" detail={false}>
+    <ion-item
+      href={menuUrl}
+      lines="none"
+      detail={false}
+      onClick={async () => {
+        await customElements.whenDefined('app-nav-items');
+        const todoListElement = document.querySelector('app-nav-items');
+        await todoListElement.dismissPopover();
+      }}
+    >
       <ion-label class={`${marginLeft && 'margin-left'}`}>{menuName}</ion-label>
       {children}
     </ion-item>
   </ion-menu-toggle>
 );
 
- const MenuItemToggle = ({ onClickHandler, expanded }) => (
+const MenuItemToggle = ({ onClickHandler, expanded }) => (
   <ion-button
     size="small"
     fill="clear"

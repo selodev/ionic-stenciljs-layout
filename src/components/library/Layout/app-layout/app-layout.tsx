@@ -4,6 +4,7 @@ import { menuItems } from '../../../../global/routes';
 @Component({
   tag: 'app-layout',
   styleUrl: 'app-layout.css',
+  shadow: false,
 })
 export class AppLayout {
   //@Prop() pageName: string;
@@ -22,12 +23,8 @@ export class AppLayout {
               <app-menu-items menuItems={menuItems} />
             </ion-content>
           </ion-menu>
-          <div class="ion-page" id="main-page">
-            <app-nav menuItems={menuItems}></app-nav>
-            <ion-content scrollX={false} scrollY={false}>
-              <slot></slot>
-            </ion-content>
-          </div>
+          <ion-nav id="main-page"></ion-nav>
+          <slot></slot>
         </ion-split-pane>
       </Host>
     );

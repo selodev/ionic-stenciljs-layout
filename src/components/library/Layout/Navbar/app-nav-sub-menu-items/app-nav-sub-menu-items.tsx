@@ -11,9 +11,9 @@ export class AppNavSubMenuItems {
   @Prop() hasChildren;
   @Prop() isChildren;
   @State() show;
-
+  @State() popover;
   async presentPopover(ev: any) {
-    const popover = await popoverController.create({
+    this.popover = await popoverController.create({
       component: 'menu-tems',
       cssClass: 'my-custom-class',
       event: ev,
@@ -23,17 +23,23 @@ export class AppNavSubMenuItems {
         hasChildren: this.hasChildren,
       },
     });
-    popover.onDidDismiss().then(() => {
+    this.popover.onDidDismiss().then(() => {
       this.show = !this.show;
     });
 
-    return await popover.present();
+    return await this.popover.present();
   }
-
+  async dismissPopover() {
+    return await this.popover.dismiss();
+  }
   render() {
     return (
       <Host>
-        <ion-button size="small" fill="clear">
+        <ion-button
+          size="small"
+          fill="clear"
+          onClick={async () => await this.dismissPopover()}
+        >sd
           {this.appPage.name}
           <ion-button
             size="small"

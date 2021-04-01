@@ -21,12 +21,13 @@ export namespace Components {
     }
     interface AppMenuItems {
         "level": number;
-        "menuItems": any;
+        "menuItems": any[];
     }
     interface AppNav {
         "menuItems": any;
     }
     interface AppNavItems {
+        "dismissPopover": () => Promise<any>;
         "isChildren": any;
         "level": number;
         "menuItems": any;
@@ -175,7 +176,7 @@ declare namespace LocalJSX {
     }
     interface AppMenuItems {
         "level"?: number;
-        "menuItems"?: any;
+        "menuItems"?: any[];
     }
     interface AppNav {
         "menuItems"?: any;

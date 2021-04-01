@@ -1,20 +1,21 @@
 import { Component,Host, h } from '@stencil/core';
+import { menuItems } from '../../global/routes';
 
 @Component({
   tag: 'app-page-1',
   styleUrl: 'app-page-1.css',
-  shadow: false,
+
 })
 export class AppPage1 {
   render() {
     return (
       <Host>
         {[
-          <ion-header>
+            <app-nav menuItems={menuItems}></app-nav>
+,
             <ion-toolbar color="primary">
               <ion-title>Page 1</ion-title>
-            </ion-toolbar>
-          </ion-header>,
+            </ion-toolbar>,
 
           <ion-content class="ion-padding">
             <p>

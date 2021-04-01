@@ -13,9 +13,8 @@ export class AppRoot {
         <ion-router useHash={false}>
           <AppRoutes routes={menuRoutes} />
         </ion-router>
-        <app-layout paneDisabled={false}>
-          <ion-nav></ion-nav>
-        </app-layout>
+        <app-layout paneDisabled={false}/>
+     
       </ion-app>
     );
   }

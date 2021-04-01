@@ -40,7 +40,7 @@ export class AppNav {
           <ion-toolbar>
             <ion-title>
               <ion-img
-                src="/assets/images/NEWLOGO.png"
+                src="/assets/icon/apple-touch-icon.png"
                 style={{ height: '50px' }}
               ></ion-img>
             </ion-title>
