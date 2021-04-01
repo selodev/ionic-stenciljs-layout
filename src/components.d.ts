@@ -36,8 +36,13 @@ export namespace Components {
         "hasChildren": any;
         "isChildren": any;
     }
+    interface AppPage1 {
+    }
+    interface AppPage2 {
+    }
+    interface AppPage3 {
+    }
     interface AppProfile {
-        "name": string;
     }
     interface AppRoot {
     }
@@ -90,6 +95,24 @@ declare global {
         prototype: HTMLAppNavSubMenuItemsElement;
         new (): HTMLAppNavSubMenuItemsElement;
     };
+    interface HTMLAppPage1Element extends Components.AppPage1, HTMLStencilElement {
+    }
+    var HTMLAppPage1Element: {
+        prototype: HTMLAppPage1Element;
+        new (): HTMLAppPage1Element;
+    };
+    interface HTMLAppPage2Element extends Components.AppPage2, HTMLStencilElement {
+    }
+    var HTMLAppPage2Element: {
+        prototype: HTMLAppPage2Element;
+        new (): HTMLAppPage2Element;
+    };
+    interface HTMLAppPage3Element extends Components.AppPage3, HTMLStencilElement {
+    }
+    var HTMLAppPage3Element: {
+        prototype: HTMLAppPage3Element;
+        new (): HTMLAppPage3Element;
+    };
     interface HTMLAppProfileElement extends Components.AppProfile, HTMLStencilElement {
     }
     var HTMLAppProfileElement: {
@@ -116,6 +139,9 @@ declare global {
         "app-nav": HTMLAppNavElement;
         "app-nav-items": HTMLAppNavItemsElement;
         "app-nav-sub-menu-items": HTMLAppNavSubMenuItemsElement;
+        "app-page-1": HTMLAppPage1Element;
+        "app-page-2": HTMLAppPage2Element;
+        "app-page-3": HTMLAppPage3Element;
         "app-profile": HTMLAppProfileElement;
         "app-root": HTMLAppRootElement;
         "app-tree-view": HTMLAppTreeViewElement;
@@ -164,8 +190,13 @@ declare namespace LocalJSX {
         "hasChildren"?: any;
         "isChildren"?: any;
     }
+    interface AppPage1 {
+    }
+    interface AppPage2 {
+    }
+    interface AppPage3 {
+    }
     interface AppProfile {
-        "name"?: string;
     }
     interface AppRoot {
     }
@@ -182,6 +213,9 @@ declare namespace LocalJSX {
         "app-nav": AppNav;
         "app-nav-items": AppNavItems;
         "app-nav-sub-menu-items": AppNavSubMenuItems;
+        "app-page-1": AppPage1;
+        "app-page-2": AppPage2;
+        "app-page-3": AppPage3;
         "app-profile": AppProfile;
         "app-root": AppRoot;
         "app-tree-view": AppTreeView;
@@ -198,6 +232,9 @@ declare module "@stencil/core" {
             "app-nav": LocalJSX.AppNav & JSXBase.HTMLAttributes<HTMLAppNavElement>;
             "app-nav-items": LocalJSX.AppNavItems & JSXBase.HTMLAttributes<HTMLAppNavItemsElement>;
             "app-nav-sub-menu-items": LocalJSX.AppNavSubMenuItems & JSXBase.HTMLAttributes<HTMLAppNavSubMenuItemsElement>;
+            "app-page-1": LocalJSX.AppPage1 & JSXBase.HTMLAttributes<HTMLAppPage1Element>;
+            "app-page-2": LocalJSX.AppPage2 & JSXBase.HTMLAttributes<HTMLAppPage2Element>;
+            "app-page-3": LocalJSX.AppPage3 & JSXBase.HTMLAttributes<HTMLAppPage3Element>;
             "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "app-tree-view": LocalJSX.AppTreeView & JSXBase.HTMLAttributes<HTMLAppTreeViewElement>;

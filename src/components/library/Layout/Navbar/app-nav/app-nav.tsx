@@ -1,4 +1,4 @@
-import { Component, Host, h, State, Prop } from '@stencil/core';
+import { Component, Host, h, State, Prop, Build } from '@stencil/core';
 
 const QUERY: { [key: string]: string } = {
   xs: '(min-width: 0px)',
@@ -18,17 +18,19 @@ export class AppNav {
   @Prop() menuItems;
 
   componentWillLoad() {
-    const mediaQuery = window.matchMedia(QUERY['md']);
-    // Update the state with the current value
-    this.mQuery = mediaQuery.matches;
-    // Create an event listener
-    const handler = event => {
-      this.mQuery = event.matches;
-    };
-    // Attach the event listener to know when the matches value changes
-    mediaQuery.addEventListener('change', handler);
-    // Remove the event listener on cleanup
-    return () => mediaQuery.removeEventListener('change', handler);
+    if (Build.isBrowser) {
+      const mediaQuery = window.matchMedia(QUERY['md']);
+      // Update the state with the current value
+      this.mQuery = mediaQuery.matches;
+      // Create an event listener
+      const handler = event => {
+        this.mQuery = event.matches;
+      };
+      // Attach the event listener to know when the matches value changes
+      mediaQuery.addEventListener('change', handler);
+      // Remove the event listener on cleanup
+      return () => mediaQuery.removeEventListener('change', handler);
+    }
   }
 
   render() {

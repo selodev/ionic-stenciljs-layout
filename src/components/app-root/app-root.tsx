@@ -1,12 +1,7 @@
 import { Component, h } from '@stencil/core';
-import { menuItems } from '../../global/routes';
+import { menuRoutes } from '../../global/routes';
+import AppRoutes from './AppRoutes';
 
-const appRoutes = routes =>
-  routes.map(({ url, children }) => (
-    <ion-route url={url} component="page-home">
-      {children && appRoutes(children)}
-    </ion-route>
-  ));
 @Component({
   tag: 'app-root',
   styleUrl: 'app-root.css',
@@ -16,12 +11,10 @@ export class AppRoot {
     return (
       <ion-app>
         <ion-router useHash={false}>
-          <ion-route url="/" component="app-home" />
-          <ion-route url="/profile/:name" component="app-profile" />
-          {appRoutes(menuItems)}
+          <AppRoutes routes={menuRoutes} />
         </ion-router>
         <app-layout paneDisabled={false}>
-          <ion-nav />
+          <ion-nav></ion-nav>
         </app-layout>
       </ion-app>
     );

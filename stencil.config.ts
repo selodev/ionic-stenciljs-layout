@@ -6,12 +6,12 @@ export const config: Config = {
   globalScript: 'src/global/app.ts',
   globalStyle: 'src/global/app.css',
   taskQueue: 'async',
-  outputTargets: [{
-    type: 'www',
-    serviceWorker: null
-  }],
-  devServer:{
-    address: '0.0.0.0',
-    port:3333
-  }
+  outputTargets: [
+    {
+      type: 'www',
+      serviceWorker: null,
+      baseUrl: 'https://isquadrepairsandiego.com',
+      prerenderConfig: './prerender.config.ts',
+    },
+  ],
 };
