@@ -73,11 +73,6 @@ const MenuItem = (
       href={menuUrl}
       lines="none"
       detail={false}
-      onClick={async () => {
-        await customElements.whenDefined('app-nav-items');
-        const todoListElement = document.querySelector('app-nav-items');
-        await todoListElement.dismissPopover();
-      }}
     >
       <ion-label class={`${marginLeft && 'margin-left'}`}>{menuName}</ion-label>
       {children}

@@ -33,9 +33,8 @@ export namespace Components {
         "menuItems": any;
     }
     interface AppNavSubMenuItems {
-        "appPage": any;
-        "hasChildren": any;
-        "isChildren": any;
+        "level": number;
+        "menuItems": any[];
     }
     interface AppPage1 {
     }
@@ -187,9 +186,8 @@ declare namespace LocalJSX {
         "menuItems"?: any;
     }
     interface AppNavSubMenuItems {
-        "appPage"?: any;
-        "hasChildren"?: any;
-        "isChildren"?: any;
+        "level"?: number;
+        "menuItems"?: any[];
     }
     interface AppPage1 {
     }

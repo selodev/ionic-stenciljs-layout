@@ -22,7 +22,7 @@ export class AppNavItems {
     this.updateDropDown(level);
 
     this.popover = await popoverController.create({
-      component: 'app-menu-items',
+      component: 'app-nav-sub-menu-items',
       cssClass: 'app-nav-items-popover-class',
       event: ev,
       translucent: true,
@@ -39,7 +39,6 @@ export class AppNavItems {
   }
   @Method()
   async dismissPopover() {
-    console.log("sd")
     return await this.popover.dismiss();
   }
   render() {
@@ -56,11 +55,7 @@ export class AppNavItems {
           return [
             menuChildren ? (
               [
-                <NavButton
-                  name={menuName}
-                  url={menuUrl}
-                  onClickHandler={async () => await this.dismissPopover()}
-                />,
+                <NavButton name={menuName} url={menuUrl} />,
                 <NavButtonToggle
                   onClickHandler={async ev => {
                     await this.presentPopover(ev, level, menuChildren);
@@ -69,11 +64,7 @@ export class AppNavItems {
                 />,
               ]
             ) : (
-              <NavButton
-                name={menuName}
-                url={menuUrl}
-                onClickHandler={async () => await this.dismissPopover()}
-              />
+              <NavButton name={menuName} url={menuUrl} />
             ),
           ];
         })}
@@ -83,15 +74,8 @@ export class AppNavItems {
   }
 }
 
-const NavButton = ({ name, url, onClickHandler }, children) => (
-  <ion-button
-    size="small"
-    fill="clear"
-    href={url}
-    onClick={() => {
-      onClickHandler();
-    }}
-  >
+const NavButton = ({ name, url }, children) => (
+  <ion-button size="small" fill="clear" href={url}>
     {name}
     {children}
   </ion-button>
@@ -110,6 +94,7 @@ const NavButtonToggle = ({ onClickHandler, expanded }) => (
     <ion-icon
       size="small"
       slot="icon-only"
+      color="primary"
       name={expanded ? 'chevron-up-outline' : 'chevron-down-outline'}
     ></ion-icon>
   </ion-button>

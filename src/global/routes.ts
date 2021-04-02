@@ -13,7 +13,7 @@ export const menuItems: MenuItem[] = [
     routeComponent: 'app-home',
   },
   {
-    name: 'Page 1',
+    name: 'Samsung Repair',
     url: '/app-page-1',
     routeComponent: 'app-page-1',
     children: [
@@ -31,6 +31,7 @@ export const menuItems: MenuItem[] = [
       },
     ],
   },
+  { name: 'iPhone Repair', url: '/app-page-1', routeComponent: 'app-page-1' },
 ];
 
 export let menuRoutes = [];
@@ -43,4 +44,4 @@ function addMenuRoutes(menuItems = []) {
     }
   });
 }
-addMenuRoutes(menuItems)
+addMenuRoutes(menuItems);

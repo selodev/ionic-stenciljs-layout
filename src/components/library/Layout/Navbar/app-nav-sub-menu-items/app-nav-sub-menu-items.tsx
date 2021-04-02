@@ -1,66 +1,91 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { popoverController } from '@ionic/core';
 
 @Component({
   tag: 'app-nav-sub-menu-items',
   styleUrl: 'app-nav-sub-menu-items.css',
-  shadow: true,
+  shadow: false,
 })
 export class AppNavSubMenuItems {
-  @Prop() appPage;
-  @Prop() hasChildren;
-  @Prop() isChildren;
-  @State() show;
-  @State() popover;
-  async presentPopover(ev: any) {
-    this.popover = await popoverController.create({
-      component: 'menu-tems',
-      cssClass: 'my-custom-class',
-      event: ev,
-      translucent: true,
-      componentProps: {
-        appPages: this.appPage.children,
-        hasChildren: this.hasChildren,
-      },
-    });
-    this.popover.onDidDismiss().then(() => {
-      this.show = !this.show;
-    });
+  @State() expanded = {};
+  @Prop() menuItems = [];
+  @Prop() level = 0;
+  updateDropDown(level) {
+    this.expanded = {
+      ...this.expanded,
+      [level]: this.expanded[level] ? !this.expanded[level] : true,
+    };
+  }
 
-    return await this.popover.present();
-  }
-  async dismissPopover() {
-    return await this.popover.dismiss();
-  }
   render() {
     return (
       <Host>
-        <ion-button
-          size="small"
-          fill="clear"
-          onClick={async () => await this.dismissPopover()}
-        >sd
-          {this.appPage.name}
-          <ion-button
-            size="small"
-            fill="clear"
-            onClick={ev => {
-              this.show = !this.show;
-              this.presentPopover(ev);
-              ev.stopPropagation();
-              ev.preventDefault();
-            }}
-          >
-            <ion-icon
-              size="small"
-              slot="icon-only"
-              name={this.show ? 'chevron-up-outline' : 'chevron-down-outline'}
-            ></ion-icon>
-          </ion-button>
-        </ion-button>
-
+        {this.menuItems.map(
+          ({ name: menuName, url: menuUrl, children: menuChildren }, index) => {
+            const level = `level-${this.level}-${index}`;
+            const expanded = this.expanded[level];
+            return menuChildren ? (
+              <div key={level} id={level}>
+                <MenuItem menuName={menuName} menuUrl={menuUrl} marginLeft>
+                  {menuChildren && (
+                    <MenuItemToggle
+                      onClickHandler={() => {
+                        this.updateDropDown(level);
+                      }}
+                      expanded={expanded}
+                    />
+                  )}
+                </MenuItem>
+                {menuChildren && (
+                  <app-nav-sub-menu-items
+                    menuItems={menuChildren}
+                    style={{
+                      display: expanded ? 'block' : 'none',
+                      marginLeft: '16px',
+                    }}
+                  />
+                )}
+              </div>
+            ) : (
+              <MenuItem menuName={menuName} menuUrl={menuUrl} marginLeft />
+            );
+          },
+        )}
         <slot></slot>
       </Host>
     );
   }
 }
+
+const MenuItem = ({ menuName, menuUrl, marginLeft }, children) => (
+  <ion-item
+    href={menuUrl}
+    lines="none"
+    detail={false}
+    onClick={async () => {
+      await customElements.whenDefined('app-nav-items');
+      const todoListElement = document.querySelector('app-nav-items');
+      await todoListElement.dismissPopover();
+    }}
+  >
+    <ion-label class={`${marginLeft && 'margin-left'}`}>{menuName}</ion-label>
+    {children}
+  </ion-item>
+);
+
+const MenuItemToggle = ({ onClickHandler, expanded }) => (
+  <ion-button
+    size="small"
+    fill="clear"
+    slot="end"
+    onClick={ev => {
+      onClickHandler(ev);
+      ev.stopImmediatePropagation();
+      ev.preventDefault();
+    }}
+  >
+    <ion-icon
+      slot="icon-only"
+      name={expanded ? 'chevron-up-outline' : 'chevron-down-outline'}
+    ></ion-icon>
+  </ion-button>
+);

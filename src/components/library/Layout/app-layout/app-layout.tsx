@@ -23,7 +23,11 @@ export class AppLayout {
               <app-menu-items menuItems={menuItems} />
             </ion-content>
           </ion-menu>
-          <ion-nav id="main-page"></ion-nav>
+          <div class="ion-page" id="main-page">
+            <app-nav menuItems={menuItems}></app-nav>
+            
+            <ion-nav class="app-layout-nav"></ion-nav>
+          </div>
           <slot></slot>
         </ion-split-pane>
       </Host>
