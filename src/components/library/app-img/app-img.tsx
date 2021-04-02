@@ -27,6 +27,7 @@ export class AppImg {
   @Prop() sizes?: string;
   @Prop() width?: string;
   @Prop() height?: string;
+  @Prop() style?: any;
 
   @Watch('src')
   srcChanged() {
@@ -103,6 +104,7 @@ export class AppImg {
           onLoad={this.onLoad}
           onError={this.loadError}
           part="image"
+          style={this.style}
         />
       </Host>
     );
