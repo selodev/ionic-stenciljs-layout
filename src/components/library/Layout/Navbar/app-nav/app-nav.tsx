@@ -19,7 +19,7 @@ export class AppNav {
 
   componentWillLoad() {
     if (Build.isBrowser) {
-      const mediaQuery = window.matchMedia(QUERY['md']);
+      const mediaQuery = window.matchMedia(QUERY['xl']);
       // Update the state with the current value
       this.mQuery = mediaQuery.matches;
       // Create an event listener
