@@ -14,7 +14,7 @@ export namespace Components {
         "sizes"?: string;
         "src"?: string;
         "srcset"?: string;
-        "style"?: any;
+        "styles"?: any;
         "width"?: string;
     }
     interface AppLayout {
@@ -169,7 +169,7 @@ declare namespace LocalJSX {
         "sizes"?: string;
         "src"?: string;
         "srcset"?: string;
-        "style"?: any;
+        "styles"?: any;
         "width"?: string;
     }
     interface AppLayout {
