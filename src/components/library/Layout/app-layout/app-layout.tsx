@@ -4,10 +4,8 @@ import { menuItems } from '../../../../global/routes';
 @Component({
   tag: 'app-layout',
   styleUrl: 'app-layout.css',
-  shadow: false,
 })
 export class AppLayout {
-  //@Prop() pageName: string;
   @Prop() paneDisabled;
   render() {
     return (
@@ -25,8 +23,9 @@ export class AppLayout {
           </ion-menu>
           <div class="ion-page" id="main-page">
             <app-nav menuItems={menuItems}></app-nav>
-            
-            <ion-nav class="app-layout-nav"></ion-nav>
+            <ion-nav
+              style={{ position: 'relative', height: '100vh' }}
+            ></ion-nav>
           </div>
           <slot></slot>
         </ion-split-pane>

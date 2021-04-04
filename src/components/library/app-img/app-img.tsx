@@ -13,7 +13,6 @@ import {
 @Component({
   tag: 'app-img',
   styleUrl: 'app-img.css',
-  shadow: true,
 })
 export class AppImg {
   private io?: IntersectionObserver;

@@ -19,7 +19,7 @@ export class AppNav {
 
   componentWillLoad() {
     if (Build.isBrowser) {
-      const mediaQuery = window.matchMedia(QUERY['xl']);
+      const mediaQuery = window.matchMedia(QUERY['lg']);
       // Update the state with the current value
       this.mQuery = mediaQuery.matches;
       // Create an event listener
@@ -41,20 +41,22 @@ export class AppNav {
             <ion-title>
               <ion-img
                 src="/assets/icon/apple-touch-icon.png"
-                style={{ height: '50px' }}
+                style={{ height: '44px' }}
               ></ion-img>
             </ion-title>
-            <ion-buttons
-              style={{ justifyContent: 'center' }}
-              slot={this.mQuery ? '' : 'end'}
-            >
-              {this.mQuery ? (
-                <app-nav-items menuItems={this.menuItems} />
-              ) : (
+            {!this.mQuery && (
+              <ion-buttons slot="end">
                 <ion-menu-button></ion-menu-button>
-              )}
-            </ion-buttons>
+              </ion-buttons>
+            )}
           </ion-toolbar>
+          {this.mQuery && (
+            <ion-toolbar>
+              <ion-buttons style={{ justifyContent: 'center' }}>
+                <app-nav-items menuItems={this.menuItems} />
+              </ion-buttons>
+            </ion-toolbar>
+          )}
         </ion-header>
 
         <slot></slot>
