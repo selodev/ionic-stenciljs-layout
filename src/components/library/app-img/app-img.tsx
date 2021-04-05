@@ -1,3 +1,4 @@
+import { getIonMode } from '@ionic/core/dist/types/global/ionic-global';
 import {
   Component,
   Host,
@@ -8,6 +9,7 @@ import {
   Watch,
   EventEmitter,
   Event,
+  Build,
 } from '@stencil/core';
 
 @Component({
@@ -18,15 +20,9 @@ export class AppImg {
   private io?: IntersectionObserver;
   @Element() el!: HTMLElement;
   @State() loadSrc?: string;
-  @State() loadSrcset?: string;
   @State() loadError?: () => void;
   @Prop() alt?: string;
   @Prop() src?: string;
-  @Prop() srcset?: string;
-  @Prop() sizes?: string;
-  @Prop() width?: string;
-  @Prop() height?: string;
-  @Prop() styles?: any;
 
   @Watch('src')
   srcChanged() {
@@ -77,7 +73,6 @@ export class AppImg {
   private load() {
     this.loadError = this.onError;
     this.loadSrc = this.src;
-    this.loadSrcset = this.srcset;
     this.ionImgWillLoad.emit();
   }
 
@@ -91,19 +86,14 @@ export class AppImg {
 
   render() {
     return (
-      <Host>
+      <Host class={getIonMode(this)}>
         <img
           decoding="async"
-          src={this.loadSrc}
-          srcSet={this.loadSrcset}
-          sizes={this.sizes}
+          src={Build.isBrowser ? this.loadSrc : this.src}
           alt={this.alt}
-          width={this.width}
-          height={this.height}
           onLoad={this.onLoad}
           onError={this.loadError}
           part="image"
-          style={this.styles}
         />
       </Host>
     );
