@@ -1,4 +1,3 @@
-import { getIonMode } from '@ionic/core/dist/types/global/ionic-global';
 import {
   Component,
   Host,
@@ -86,7 +85,7 @@ export class AppImg {
 
   render() {
     return (
-      <Host class={getIonMode(this)}>
+      <Host>
         <img
           decoding="async"
           src={Build.isBrowser ? this.loadSrc : this.src}
