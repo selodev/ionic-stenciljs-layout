@@ -13,7 +13,7 @@ ion-split-pane {
   right: 0;
 
   display: flex;
-  position: absolute;
+  position: relative;
 
   flex-direction: column;
   justify-content: space-between;

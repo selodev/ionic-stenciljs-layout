@@ -10,12 +10,7 @@ export namespace Components {
     }
     interface AppImg {
         "alt"?: string;
-        "height"?: string;
-        "sizes"?: string;
         "src"?: string;
-        "srcset"?: string;
-        "styles"?: any;
-        "width"?: string;
     }
     interface AppLayout {
         "paneDisabled": any;
@@ -153,7 +148,6 @@ declare namespace LocalJSX {
     }
     interface AppImg {
         "alt"?: string;
-        "height"?: string;
         /**
           * Emitted when the img fails to load
          */
@@ -166,11 +160,7 @@ declare namespace LocalJSX {
           * Emitted when the img src has been set
          */
         "onIonImgWillLoad"?: (event: CustomEvent<void>) => void;
-        "sizes"?: string;
         "src"?: string;
-        "srcset"?: string;
-        "styles"?: any;
-        "width"?: string;
     }
     interface AppLayout {
         "paneDisabled"?: any;
