@@ -21,7 +21,7 @@ export class AppLayout {
               <app-menu-items menuItems={menuItems} />
             </ion-content>
           </ion-menu>
-          <div class="ion-page" id="main-page">
+          <div class="app-page" id="main-page">
             <app-nav menuItems={menuItems}></app-nav>
             <ion-nav
               style={{ position: 'relative', height: '100vh' }}

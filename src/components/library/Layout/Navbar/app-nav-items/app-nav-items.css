@@ -4,4 +4,4 @@
 
 .app-nav-items-popover-class {
   --width: auto !important;
-}
+  --max-height: 70% !important;}
